@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ninject" Version="3.3.4" />
+    <ProjectReference Include="..\CQRSDemo\CQRSDemo.csproj" />
   </ItemGroup>
 
 </Project>

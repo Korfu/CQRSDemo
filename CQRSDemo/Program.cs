@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CQRSDemo.SMSnotification;
+using Ninject;
+using System;
 
 namespace CQRSDemo
 {
@@ -6,7 +8,18 @@ namespace CQRSDemo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IKernel container = new StandardKernel();
+            container.Bind<IButler>().To<Please>();
+            container.Bind<ICommandHandler<AddUser>>().To<AddUSerHandler>();
+            container.Bind<IEventHandler<UserCreated>>().To<OnUserCreated>();
+            container.Bind<IEventHandler<UserCreated>>().To<MailNotificaiton.OnUserCreated>();
+
+            var please = container.Get<IButler>();
+            please.Do(new AddUser("Mic", "Michal Matuszek"));
+            //            please.Do(new EditUser("Mic", "Michal Matuszek"));
+
+
+            Console.ReadKey();
         }
     }
 }
