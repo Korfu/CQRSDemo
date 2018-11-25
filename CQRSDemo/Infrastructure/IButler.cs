@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CQRSDemo.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,5 +9,6 @@ namespace CQRSDemo
     {
         void Do<TCommand>(TCommand command);
         void Tell<TEvent>(TEvent @event);
+        TQuery Give<TQuery>(TQuery  query);
     }
 }

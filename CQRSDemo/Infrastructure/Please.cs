@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using CQRSDemo.Infrastructure;
+using Ninject;
 
 namespace CQRSDemo
 {
@@ -15,6 +16,13 @@ namespace CQRSDemo
         {
             var handler = _container.Get<ICommandHandler<TCommand>>();
             handler.Handle(command);
+        }
+
+        public TQuery Give<TQuery>(TQuery query)
+        {
+            var handler = _container.Get<IQueryHandler<TQuery>>();
+            handler.Handle(query);
+            return query;
         }
 
         public void Tell<TEvent>(TEvent @event)

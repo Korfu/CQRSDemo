@@ -1,5 +1,7 @@
 ﻿using CQRSDemo.Commands;
 using CQRSDemo.Events;
+using CQRSDemo.Infrastructure;
+using CQRSDemo.Queries;
 using CQRSDemo.SMSnotification;
 using Ninject;
 using System;
@@ -25,11 +27,21 @@ namespace CQRSDemo
             container.Bind<IEventHandler<UserEdited>>().To<OnUserEdited>();
             container.Bind<IEventHandler<UserEdited>>().To<MailNotificaiton.OnUserEdited>();
 
+            container.Bind<IQueryHandler<UserListing>>().To<UserListingQueryHandler>();
+
             var please = container.Get<IButler>();
 
             please.Do(new AddUser("Mic", "Michal Matuszek"));
             please.Do(new DeleteUser("Korfu"));
             please.Do(new EditUser("Pinky"));
+
+            var users = please.Give(new UserListing()).Data;
+
+            foreach (var user in users)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine(user.Name);
+            }
 
             Console.ReadKey();
         }
