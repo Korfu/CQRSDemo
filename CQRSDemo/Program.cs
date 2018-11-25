@@ -1,4 +1,5 @@
 ﻿using CQRSDemo.Commands;
+using CQRSDemo.Events;
 using CQRSDemo.SMSnotification;
 using Ninject;
 using System;
@@ -20,12 +21,15 @@ namespace CQRSDemo
             container.Bind<IEventHandler<UserDeleted>>().To<OnUserDeleted>();
             container.Bind<IEventHandler<UserDeleted>>().To<MailNotificaiton.OnUserDeleted>();
 
+            container.Bind<ICommandHandler<EditUser>>().To<EditUserHandler>();
+            container.Bind<IEventHandler<UserEdited>>().To<OnUserEdited>();
+            container.Bind<IEventHandler<UserEdited>>().To<MailNotificaiton.OnUserEdited>();
 
             var please = container.Get<IButler>();
 
             please.Do(new AddUser("Mic", "Michal Matuszek"));
-          //please.Do(new EditUser("Mic", "Michal Matuszek"));
             please.Do(new DeleteUser("Korfu"));
+            please.Do(new EditUser("Pinky"));
 
             Console.ReadKey();
         }
