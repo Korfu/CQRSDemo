@@ -21,7 +21,8 @@ namespace CQRSDemo.Queries
         {
             var result = new List<UserListingItem>()
             {
-                new UserListingItem { Name="Konrad", Login="koko" }
+                new UserListingItem { Name="Konrad", Login="koko" },
+                new UserListingItem { Name="Kamil", Login="kako" }
             };
 
             query.Data = result;

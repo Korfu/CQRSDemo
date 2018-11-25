@@ -28,6 +28,7 @@ namespace CQRSDemo
             container.Bind<IEventHandler<UserEdited>>().To<MailNotificaiton.OnUserEdited>();
 
             container.Bind<IQueryHandler<UserListing>>().To<UserListingQueryHandler>();
+            container.Bind<IQueryHandler<CountryListing>>().To<CountriesListingHandler>();
 
             var please = container.Get<IButler>();
 
@@ -41,6 +42,14 @@ namespace CQRSDemo
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine(user.Name);
+            }
+
+            var countries = please.Give(new CountryListing()).Data;
+
+            foreach (var country in countries)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine($"{country.Name} : {country.Capital}");
             }
 
             Console.ReadKey();
