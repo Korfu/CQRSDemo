@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CQRSDemo.SMSnotification
 {
@@ -8,7 +6,7 @@ namespace CQRSDemo.SMSnotification
     {
         public void Handle(UserCreated @event)
         {
-            Console.WriteLine("Wysylam SMS");
+            Console.WriteLine($"Wysylam SMS, że się dodał {@event.Name}");
         }
     }
 

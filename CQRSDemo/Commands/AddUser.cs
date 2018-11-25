@@ -25,9 +25,9 @@ namespace CQRSDemo
                 Name = command.Name,
                 Login = command.Login
             };
-
+            Console.WriteLine(" ");
             Console.WriteLine($"Stworzylem uzytkownika {user.Name}, {user.Login}!");
-
+            
             //save to db
 
             Please.Tell(new UserCreated(user.Name));

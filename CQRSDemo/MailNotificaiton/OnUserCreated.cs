@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CQRSDemo.MailNotificaiton
 {
@@ -8,7 +6,7 @@ namespace CQRSDemo.MailNotificaiton
     {
         public void Handle(UserCreated @event)
         {
-            Console.WriteLine("wyslalaem email!");
+            Console.WriteLine($"wyslalaem email, że się dodał{@event.Name} !");
         }
     }
 }
